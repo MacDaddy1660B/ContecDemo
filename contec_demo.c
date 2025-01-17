@@ -42,14 +42,22 @@
 #define DEVICE		"DIO-32DM3-PE"
 #define DEVICENAME	"DIO000"
 
+#define PORT0		0
+#define PORT1		1
+#define PORT2		2
+#define PORT3		3
+
 int main() {
 	
 	short Id;
 	long rc;
 	char ErrorString[256];
 	int param;
-	short shortParam;
-	unsigned char Data;
+	short 		shortParam,
+			InpPorts[2] = {PORT0, PORT1},
+			OutPorts[2] = {PORT2, PORT3};
+	unsigned char 	Data,
+			DataArray[2] = {0xf0, 0xf0};
 
 	// Get some device info
 	rc = DioGetDeviceInfo(DEVICE, IDIO_DEVICE_TYPE, &shortParam, NULL, NULL);
@@ -114,6 +122,22 @@ int main() {
 	//
 	// Put some calls in here to output and input some data.
 	//
+	rc = DioOutMultiByte(Id, OutPorts, 2, DataArray);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
+	}
+
+	rc = DioInpMultiByte(Id, InpPorts, 2, DataArray);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioInpMultiByte: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioInpMultiByte: got DataArray: ");
+		for (int i=0; i<2; i++) { printf("\t%i", DataArray[i]); }
+		printf("\n");
+	}
+	
 
 	// Close the device
 	rc = DioExit(Id);
