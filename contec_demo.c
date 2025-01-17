@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include "cdio.h"
 
+#define DEVICE		"DIO-32DM3-PE"
 #define DEVICENAME	"DIO000"
 
 int main() {
@@ -51,33 +52,47 @@ int main() {
 	unsigned char Data;
 
 	// Get some device info
-	rc = DioGetDeviceInfo(DEVICENAME, IDIO_DEVICE_TYPE, &shortParam, NULL, NULL);
+	rc = DioGetDeviceInfo(DEVICE, IDIO_DEVICE_TYPE, &shortParam, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioGetDeviceInfo: IDIO_DEVICE_TYPE: %hi", shortParam);
+		printf("DioGetDeviceInfo: IDIO_DEVICE_TYPE: %hi\n", shortParam);
 	}
-	rc = DioGetDeviceInfo(DEVICENAME, IDIO_NUMBER_OF_DI_PORT, &shortParam, NULL, NULL);
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_DI_PORT, &shortParam, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DI_PORT: %hi", shortParam);
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DI_PORT: %hi\n", shortParam);
 	}
-	rc = DioGetDeviceInfo(DEVICENAME, IDIO_NUMBER_OF_DO_PORT, &shortParam, NULL, NULL);
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_DO_PORT, &shortParam, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DO_PORT: %hi", shortParam);
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DO_PORT: %hi\n", shortParam);
 	}
-	rc = DioGetDeviceInfo(DEVICENAME, IDIO_IS_DIRECTION, &param, NULL, NULL);
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_DI_BIT, &shortParam, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioGetDeviceInfo: IDIO_IS_DIRECTION: %i", param);
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DI_BIT: %hi\n", shortParam);
+	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_DO_BIT, &shortParam, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DO_BIT: %hi\n", shortParam);
+	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_DIRECTION, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_IS_DIRECTION: %i\n", param);
 	}
 
 	// Initialize the device
@@ -87,14 +102,14 @@ int main() {
 		printf("DioInit: %li: %s\n", rc, ErrorString);
 	}
 
-	// Set IO direction
-	// Port 0-1: Output
-	// Port 2-3: Input
-	rc = DioSetIoDirection(Id, 0x03);	// 0000-0011
-	if (rc != DIO_ERR_SUCCESS) {
-		DioGetErrorString(rc, ErrorString);
-		printf("DioSetIoDirection: %li: %s\n", rc, ErrorString);
-	}
+	//// Set IO direction
+	//// Port 0-1: Output
+	//// Port 2-3: Input
+	//rc = DioSetIoDirection(Id, 0x03);	// 0000-0011
+	//if (rc != DIO_ERR_SUCCESS) {
+	//	DioGetErrorString(rc, ErrorString);
+	//	printf("DioSetIoDirection: %li: %s\n", rc, ErrorString);
+	//}
 
 	//
 	// Put some calls in here to output and input some data.
