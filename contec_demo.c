@@ -110,24 +110,15 @@ int main() {
 		printf("DioInit: %li: %s\n", rc, ErrorString);
 	}
 
-	//// Set IO direction
-	//// Port 0-1: Output
-	//// Port 2-3: Input
-	//rc = DioSetIoDirection(Id, 0x03);	// 0000-0011
-	//if (rc != DIO_ERR_SUCCESS) {
-	//	DioGetErrorString(rc, ErrorString);
-	//	printf("DioSetIoDirection: %li: %s\n", rc, ErrorString);
-	//}
-
-	//
-	// Put some calls in here to output and input some data.
-	//
+	
+	// Multi-byte output.
 	rc = DioOutMultiByte(Id, OutPorts, 2, DataArray);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
 	}
 
+	// Multi-byte input.
 	rc = DioInpMultiByte(Id, InpPorts, 2, DataArray);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
@@ -138,6 +129,28 @@ int main() {
 		printf("\n");
 	}
 	
+	
+	// Multi-bit output.
+	short OutBitNo[8] = {0,1,2,3,4,5,6,7};
+	unsigned char ByteOut[8] = {0,1,0,1,0,1,0,1};
+	rc = DioOutMultiBit(Id, OutBitNo, 8, ByteOut);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
+	}
+	
+	// Multi-bit input.
+	short InpBitNo[8] = {16,17,18,19,20,21,22,23};
+	unsigned char ByteIn[8];
+	rc = DioInpMultiBit(Id, InpBitNo, 8, ByteIn);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioInpMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioInpMultiBit: got DataArray: ");
+		for (int i=0; i<2; i++) { printf("\t%i", ByteIn[i]); }
+		printf("\n");
+	}
 
 	// Close the device
 	rc = DioExit(Id);
