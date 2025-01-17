@@ -130,6 +130,14 @@ int main() {
 	}
 	
 	
+	// Reset the device.
+	rc = DioResetDevice(Id);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioResetDevice: %li: %s\n", rc, ErrorString);
+	}
+
+	
 	// Multi-bit output.
 	short OutBitNo[8] = {0,1,2,3,4,5,6,7};
 	unsigned char ByteOut[8] = {0,1,0,1,0,1,0,1};
@@ -138,7 +146,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
 	}
-	
+
 	// Multi-bit input.
 	short InpBitNo[8] = {16,17,18,19,20,21,22,23};
 	unsigned char ByteIn[8];
@@ -152,6 +160,15 @@ int main() {
 		printf("\n");
 	}
 
+	
+	// Reset the device.
+	rc = DioResetDevice(Id);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioResetDevice: %li: %s\n", rc, ErrorString);
+	}
+
+	
 	// Close the device
 	rc = DioExit(Id);
 	if (rc != DIO_ERR_SUCCESS) {
