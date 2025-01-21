@@ -147,6 +147,17 @@ int main() {
 		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
 	}
 
+	// Multi-bit Echo-back
+	rc = DioEchoBackMultiBit(Id, OutBitNo, 8, ByteOut);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("dioechobackmultibit: got dataarray: ");
+		for (int i=0; i<2; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
+	}
+
 	// Multi-bit input.
 	short InpBitNo[8] = {16,17,18,19,20,21,22,23};
 	unsigned char ByteIn[8];
@@ -157,17 +168,6 @@ int main() {
 	} else {
 		printf("dioinpmultibit: got dataarray: ");
 		for (int i=0; i<2; i++) { printf("\t%i", ByteIn[i]); }
-		printf("\n");
-	}
-
-	// Multi-bit Echo-back
-	rc = DioEchoBackMultiBit(Id, OutBitNo, 8, ByteOut);
-	if (rc != DIO_ERR_SUCCESS) {
-		DioGetErrorString(rc, ErrorString);
-		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
-	} else {
-		printf("dioechobackmultibit: got dataarray: ");
-		for (int i=0; i<2; i++) { printf("\t%i", ByteOut[i]); }
 		printf("\n");
 	}
 
