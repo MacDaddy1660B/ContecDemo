@@ -115,7 +115,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioOutMultiByte: output: ");
+		printf("DioOutMultiByte: output:\t");
 		for (int i=0; i<2; i++) { printf("\t%i", OutPortArray[i]); }
 		printf("\n");
 	}
@@ -128,7 +128,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInpMultiByte: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioInpMultiByte: got DataArray: ");
+		printf("DioInpMultiByte: got InPortArray: ");
 		for (int i=0; i<2; i++) { printf("\t%i", InPortArray[i]); }
 		printf("\n");
 	}
