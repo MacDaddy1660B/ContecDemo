@@ -104,6 +104,8 @@ int main() {
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioInit: device initialized.");
 	}
 
 
@@ -139,6 +141,8 @@ int main() {
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioResetDevice: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioResetDevice: device reset.");
 	}
 
 	
@@ -198,6 +202,8 @@ int main() {
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioResetDevice: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioResetDevice: device reset.");
 	}
 
 	// Multi-bit Echo-back
@@ -218,6 +224,8 @@ int main() {
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioExit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioExit: device destroyed.");
 	}
 
 	return 0;
