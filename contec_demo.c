@@ -142,20 +142,6 @@ int main() {
 	}
 
 	
-	// Set the internal clock to 1 second, just as a demo.
-	rc = DioDmSetInternalClock(Id, DIODM_DIR_OUT, 1, 1);
-	if (rc != DIO_ERR_SUCCESS) {
-		DioGetErrorString(rc, ErrorString);
-		printf("DioDmSetInternalClock: %li: %s\n", rc, ErrorString);
-	}
-	
-	// Start sampling.
-	rc = DioDmStart(Id, DIODM_DIR_OUT);
-	if (rc != DIO_ERR_SUCCESS) {
-		DioGetErrorString(rc, ErrorString);
-		printf("DioDmStart: %li: %s\n", rc, ErrorString);
-	}
-	
 	// Multi-bit output.
 	short OutBitNo[8] = {0,1,2,3,4,5,6,7};
 	unsigned char ByteOut[8] = {0,1,0,1,0,1,0,1};
@@ -191,13 +177,6 @@ int main() {
 		printf("DioInpMultiBit: got dataarray: ");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteIn[i]); }
 		printf("\n");
-	}
-	
-	// Stop sampling.
-	rc = DioDmStop(Id, DIODM_DIR_OUT);
-	if (rc != DIO_ERR_SUCCESS) {
-		DioGetErrorString(rc, ErrorString);
-		printf("DioDmStop: %li: %s\n", rc, ErrorString);
 	}
 
 	
