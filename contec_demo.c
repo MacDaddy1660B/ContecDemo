@@ -157,26 +157,26 @@ int main() {
 
 	// Multi-bit Echo-back
 	short EchoBitNo[8] = {0,1,2,3,4,5,6,7};
-	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0};
+	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0}; // These data has to be zeroed-out, or else.
 	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioEchoBackMultiBit: got dataarray: ");
+		printf("DioEchoBackMultiBit: got EchoBack: ");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
 		printf("\n");
 	}
 
 	// Multi-bit input.
-	short InpBitNo[8] = {16,17,18,19,20,21,22,23};
-	unsigned char ByteIn[8];
+	short InpBitNo[8] = {0,1,2,3,4,5,6,7};
+	unsigned char ByteIn[8] = {0,0,0,0,0,0,0,0};
 	rc = DioInpMultiBit(Id, InpBitNo, 8, ByteIn);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInpMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioInpMultiBit: got dataarray\t");
+		printf("DioInpMultiBit: got ByteIn:\t");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteIn[i]); }
 		printf("\n");
 	}
