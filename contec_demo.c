@@ -154,7 +154,7 @@ int main() {
 		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
 		printf("dioechobackmultibit: got dataarray: ");
-		for (int i=0; i<2; i++) { printf("\t%i", ByteOut[i]); }
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
 		printf("\n");
 	}
 
@@ -167,7 +167,7 @@ int main() {
 		printf("DioInpMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
 		printf("dioinpmultibit: got dataarray: ");
-		for (int i=0; i<2; i++) { printf("\t%i", ByteIn[i]); }
+		for (int i=0; i<8; i++) { printf("\t%i", ByteIn[i]); }
 		printf("\n");
 	}
 
