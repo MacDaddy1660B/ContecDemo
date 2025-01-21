@@ -182,8 +182,7 @@ int main() {
 	}
 
 	// Multi-bit Echo-back
-	short EchoBitNo[8] = {0,1,2,3,4,5,6,7};
-	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0}; // These must be set to zero, or else.
+	for (int i=0; i<8; i++) {EchoBack[i]=0;}
 	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
