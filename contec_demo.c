@@ -53,9 +53,7 @@ int main() {
 	char 		ErrorString[256];
 	int 		param;
 	short 		Id,
-			shortParam,
-			InpPorts[2] = {PORT2, PORT3};
-	unsigned char 	Data;
+			shortParam;
 
 	// Get some device info
 	rc = DioGetDeviceInfo(DEVICE, IDIO_DEVICE_TYPE, &shortParam, NULL, NULL);
@@ -111,25 +109,27 @@ int main() {
 
 	// Multi-byte output.
 	short OutPorts[2] = {PORT0, PORT1};
-	unsigned char DataArray[2] = {0xf0, 0xf0};
-	rc = DioOutMultiByte(Id, OutPorts, 2, DataArray);
+	unsigned char OutPortArray[2] = {0xf0, 0xf0};
+	rc = DioOutMultiByte(Id, OutPorts, 2, OutPortArray);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
 	} else {
 		printf("DioOutMultiByte: output: ");
-		for (int i=0; i<2; i++) { printf("\t%i", DataArray[i]); }
+		for (int i=0; i<2; i++) { printf("\t%i", OutPortArray[i]); }
 		printf("\n");
 	}
 
 	// Multi-byte input.
-	rc = DioInpMultiByte(Id, InpPorts, 2, DataArray);
+	short InpPorts[2] = {PORT2, PORT3};
+	unsigned char InPortArray[2] = {0, 0};
+	rc = DioInpMultiByte(Id, InpPorts, 2, InPortArray);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInpMultiByte: %li: %s\n", rc, ErrorString);
 	} else {
 		printf("DioInpMultiByte: got DataArray: ");
-		for (int i=0; i<2; i++) { printf("\t%i", DataArray[i]); }
+		for (int i=0; i<2; i++) { printf("\t%i", InPortArray[i]); }
 		printf("\n");
 	}
 	
@@ -157,7 +157,7 @@ int main() {
 
 	// Multi-bit Echo-back
 	short EchoBitNo[8] = {0,1,2,3,4,5,6,7};
-	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0}; // These data has to be zeroed-out, or else.
+	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0}; // These must be set to zero, or else.
 	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
@@ -170,7 +170,7 @@ int main() {
 
 	// Multi-bit input.
 	short InpBitNo[8] = {0,1,2,3,4,5,6,7};
-	unsigned char ByteIn[8] = {0,0,0,0,0,0,0,0};
+	unsigned char ByteIn[8] = {0,0,0,0,0,0,0,0}; // These must be set to zero, or else.
 	rc = DioInpMultiBit(Id, InpBitNo, 8, ByteIn);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
