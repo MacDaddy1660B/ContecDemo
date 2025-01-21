@@ -150,7 +150,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioOutMultiBit: output:\t");
+		printf("DioOutMultiBit: output:\t\t");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
 		printf("\n");
 	}
