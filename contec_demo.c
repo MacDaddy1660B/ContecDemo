@@ -156,7 +156,9 @@ int main() {
 	}
 
 	// Multi-bit Echo-back
-	rc = DioEchoBackMultiBit(Id, OutBitNo, 8, ByteOut);
+	short EchoBitNo[8] = {0,1,2,3,4,5,6,7};
+	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0};
+	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
