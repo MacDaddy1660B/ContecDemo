@@ -145,6 +145,10 @@ int main() {
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioOutMultiBit: output: ");
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
 	}
 
 	// Multi-bit Echo-back
@@ -153,7 +157,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("dioechobackmultibit: got dataarray: ");
+		printf("DioEchoBackMultiBit: got dataarray: ");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
 		printf("\n");
 	}
@@ -166,7 +170,7 @@ int main() {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInpMultiBit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("dioinpmultibit: got dataarray: ");
+		printf("DioInpMultiBit: got dataarray: ");
 		for (int i=0; i<8; i++) { printf("\t%i", ByteIn[i]); }
 		printf("\n");
 	}
