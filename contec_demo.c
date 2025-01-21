@@ -126,7 +126,7 @@ int main() {
 		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
 	} else {
 		printf("DioOutMultiByte: output: ");
-		for (int i=0; i<8; i++) { printf("\t%i", DataArray[i]); }
+		for (int i=0; i<2; i++) { printf("\t%i", DataArray[i]); }
 		printf("\n");
 	}
 
