@@ -193,12 +193,23 @@ int main() {
 		printf("\n");
 	}
 
-	
 	// Reset the device.
 	rc = DioResetDevice(Id);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioResetDevice: %li: %s\n", rc, ErrorString);
+	}
+
+	// Multi-bit Echo-back
+	for (int i=0; i<8; i++) {EchoBack[i]=0;}
+	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioEchoBackMultiBit: got EchoBack: ");
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
 	}
 
 	
