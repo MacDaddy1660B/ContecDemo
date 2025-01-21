@@ -49,15 +49,13 @@
 
 int main() {
 	
-	short Id;
-	long rc;
-	char ErrorString[256];
-	int param;
-	short 		shortParam,
-			InpPorts[2] = {PORT0, PORT1},
-			OutPorts[2] = {PORT2, PORT3};
-	unsigned char 	Data,
-			DataArray[2] = {0xf0, 0xf0};
+	long 		rc;
+	char 		ErrorString[256];
+	int 		param;
+	short 		Id,
+			shortParam,
+			InpPorts[2] = {PORT2, PORT3};
+	unsigned char 	Data;
 
 	// Get some device info
 	rc = DioGetDeviceInfo(DEVICE, IDIO_DEVICE_TYPE, &shortParam, NULL, NULL);
@@ -110,12 +108,26 @@ int main() {
 		printf("DioInit: %li: %s\n", rc, ErrorString);
 	}
 
+
+	// Set the internal clock to 1 second, just as a demo.
+	rc = DioDmSetInternalClock(Id, DIODM_DIR_OUT, 1, 1);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioDmSetInternalClock: %li: %s\n", rc, ErrorString);
+	}
+
 	
 	// Multi-byte output.
+	short OutPorts[2] = {PORT0, PORT1};
+	unsigned char DataArray[2] = {0xf0, 0xf0};
 	rc = DioOutMultiByte(Id, OutPorts, 2, DataArray);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioOutMultiByte: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioOutMultiByte: output: ");
+		for (int i=0; i<8; i++) { printf("\t%i", DataArray[i]); }
+		printf("\n");
 	}
 
 	// Multi-byte input.
