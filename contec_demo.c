@@ -181,6 +181,19 @@ int main() {
 		printf("\n");
 	}
 
+	// Multi-bit Echo-back
+	short EchoBitNo[8] = {0,1,2,3,4,5,6,7};
+	unsigned char EchoBack[8] = {0,0,0,0,0,0,0,0}; // These must be set to zero, or else.
+	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioEchoBackMultiBit: got EchoBack: ");
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
+	}
+
 	
 	// Reset the device.
 	rc = DioResetDevice(Id);
