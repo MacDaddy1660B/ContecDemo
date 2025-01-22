@@ -74,13 +74,18 @@ int main() {
 	rc = printDioErrorString(rc, "DioDmStart");
 	unsigned long Status = DIODM_STATUS_PIOSTART;
 	unsigned long Err;
-	while (Status != DIODM_STATUS_BMSTOP) {
+	while (Status == DIODM_STATUS_PIOSTART) {
 		rc = DioDmGetStatus(Id, DIODM_DIR_IN, &Status, &Err);
 		rc = printDioErrorString(rc, "DioDmGetStatus");
-		printf("Err: %li\n", Err);
+		printf("Status: %li\tErr: %li\n", Status, Err);
 	}
 	rc = DioDmStop(Id, DIODM_DIR_IN);
 	rc = printDioErrorString(rc, "DioDmStop");
+
+	// Print the input data
+	printf("INPUT BUFFER CONTENTS:\n");
+	for (int i=0; i<INBUFFERLEN; i++) {printf("%i ", InBuff[i]);}
+	printf("\n");
 
 
 	// De-initialize device.
