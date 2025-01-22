@@ -63,6 +63,20 @@ int main() {
 	} else {
 		printf("DioGetDeviceInfo: IDIO_DEVICE_TYPE: %hi\n", shortParam);
 	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_8255, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_8255: %hi\n", param);
+	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_8255_BOARD, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_IS_8255_BOARD: %hi\n", param);
+	}
 	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_DI_PORT, &shortParam, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
@@ -91,6 +105,20 @@ int main() {
 	} else {
 		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_DO_BIT: %hi\n", shortParam);
 	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_POSITIVE_LOGIC, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_IS_POSITIVE_LOGIC: %hi\n", param);
+	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_ECHO_BACK, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_IS_ECHO_BACK: %hi\n", param);
+	}
 	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_DIRECTION, &param, NULL, NULL);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
@@ -98,7 +126,22 @@ int main() {
 	} else {
 		printf("DioGetDeviceInfo: IDIO_IS_DIRECTION: %i\n", param);
 	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_IS_FILTER, &param, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_IS_FILTER: %hi\n", param);
+	}
+	rc = DioGetDeviceInfo(DEVICE, IDIO_NUMBER_OF_INT_BIT, &shortParam, NULL, NULL);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioGetDeviceInfo: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_INT_BIT: %hi\n", shortParam);
+	}
 
+	
 	// Initialize the device
 	rc = DioInit( DEVICENAME, &Id);
 	if (rc != DIO_ERR_SUCCESS) {
