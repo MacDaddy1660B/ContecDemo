@@ -218,6 +218,30 @@ int main() {
 		printf("\n");
 	}
 
+	// Multi-bit output.
+	for (int i=0; i<8; i++) {ByteOut[i] = 0;}
+	rc = DioOutMultiBit(Id, OutBitNo, 8, ByteOut);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioOutMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioOutMultiBit: output:\t\t");
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
+	}
+
+	// Multi-bit Echo-back
+	for (int i=0; i<8; i++) {EchoBack[i]=0;}
+	rc = DioEchoBackMultiBit(Id, EchoBitNo, 8, EchoBack);
+	if (rc != DIO_ERR_SUCCESS) {
+		DioGetErrorString(rc, ErrorString);
+		printf("DioEchoBackMultiBit: %li: %s\n", rc, ErrorString);
+	} else {
+		printf("DioEchoBackMultiBit: got EchoBack: ");
+		for (int i=0; i<8; i++) { printf("\t%i", ByteOut[i]); }
+		printf("\n");
+	}
+
 	
 	// Close the device
 	rc = DioExit(Id);
