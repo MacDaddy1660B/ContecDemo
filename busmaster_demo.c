@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "cdio.h"
 
 #define DEVICENAME	"DIO000"
@@ -12,7 +13,7 @@
 #define	OUTPORTS	{PORT2, PORT3}
 
 #define ERRORBUFFER	256
-#define INBUFFERLEN	2028
+#define INBUFFERLEN	1000
 #define OUTBUFFERLEN	2048
 
 
@@ -33,7 +34,7 @@ int main() {
 
 	// Set the IO direction.
 	rc = DioDmSetDirection(Id, PIO_1616);
-	rc = printDioErrorString(Id, "DioDmSetDirection");
+	rc = printDioErrorString(rc, "DioDmSetDirection");
 
 
 	// Set stand-alone mode since we're only using one board.
@@ -74,11 +75,17 @@ int main() {
 	rc = printDioErrorString(rc, "DioDmStart");
 	unsigned long Status = DIODM_STATUS_PIOSTART;
 	unsigned long Err;
-	while (Status == DIODM_STATUS_PIOSTART) {
-		rc = DioDmGetStatus(Id, DIODM_DIR_IN, &Status, &Err);
-		rc = printDioErrorString(rc, "DioDmGetStatus");
-		printf("Status: %li\tErr: %li\n", Status, Err);
-	}
+	rc = DioDmGetStatus(Id, DIODM_DIR_IN, &Status, &Err);
+	rc = printDioErrorString(rc, "DioDmGetStatus");
+	//while (Status == DIODM_STATUS_PIOSTART) {
+	//	rc = DioDmGetStatus(Id, DIODM_DIR_IN, &Status, &Err);
+	//	//rc = printDioErrorString(rc, "DioDmGetStatus");
+	//	//printf("Status: %li\tErr: %li\n", Status, Err);
+	//}
+	struct timespec req;
+	req.tv_sec = 1;
+	req.tv_nsec = 1000;
+	nanosleep(&req, NULL);
 	rc = DioDmStop(Id, DIODM_DIR_IN);
 	rc = printDioErrorString(rc, "DioDmStop");
 

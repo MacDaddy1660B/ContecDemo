@@ -141,14 +141,13 @@ int main() {
 		printf("DioGetDeviceInfo: IDIO_NUMBER_OF_INT_BIT: %hi\n", shortParam);
 	}
 
-	
 	// Initialize the device
 	rc = DioInit( DEVICENAME, &Id);
 	if (rc != DIO_ERR_SUCCESS) {
 		DioGetErrorString(rc, ErrorString);
 		printf("DioInit: %li: %s\n", rc, ErrorString);
 	} else {
-		printf("DioInit: device initialized.\n");
+		printf("DioInit: device initialized. Id: %hi\n");
 	}
 
 
